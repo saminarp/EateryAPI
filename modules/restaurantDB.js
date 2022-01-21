@@ -78,7 +78,7 @@ module.exports = class RestaurantDB {
   }
 
   updateRestaurantById(data, id) {
-    return Promise.reject(new Error("data and id parameters are required "));
+    return this.Restaurant.updateOne({ _id: id }, { $set: data }).exec();
   }
 
   deleteRestaurantById(id) {
