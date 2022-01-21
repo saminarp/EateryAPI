@@ -64,11 +64,15 @@ app.get("/api/restaurants/:id", (req, res) => {
 //update restaurant by id with required data
 app.put("/api/restaurants/:id", (req, res) => {
   db.updateRestaurantById(req.body, req.params.id)
-    .then(() => {
+    .then((data) => {
+      if (Object.keys(req.body).length === 0) {
+        return res.status(500).json({ message: `data : ${data.message}` });
+      }
       res.status(201).json(`Restaurant ${req.params.id} got updated`);
     })
     .catch((err) => {
       res.status(500).json({ message: err.message });
+      console.log(err);
     });
 });
 //delete restraunt by _id
