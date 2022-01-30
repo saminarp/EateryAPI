@@ -1,10 +1,10 @@
 /************************************************************************ *********
- * WEB422 – Assignment 1
+ * WEB422 – Assignment 2
  * I declare that this assignment is my own work in accordance with Seneca Academic Policy.
  * No part of this assignment has been copied manually or electronically from any other source
  * (including web sites) or distributed to other students. *
  * Name: Samina Rahman Purba Student ID: 101855203 Date: 2022/01/19
- * Heroku Link: https://sleepy-anchorage-77769.herokuapp.com/
+ * Heroku Link: https://sleepy-anchorage-77769.herokuapp.com
  * ********************************************************************************/
 
 const express = require("express");
@@ -28,6 +28,7 @@ app.get("/api/restaurants", (req, res) => {
   db.getAllRestaurants(req.query.page, req.query.perPage, req.query.borough)
     .then((restaurants) => {
       res.status(200).json(restaurants);
+      return;
     })
     .catch((err) => {
       res.status(400).json({ message: err.message });
