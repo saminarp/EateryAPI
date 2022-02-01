@@ -16,14 +16,15 @@ const db = new RestaurantDB(
 );
 const HTTP_PORT = process.env.PORT || 8080;
 
-//middleware
 app.use(cors());
 app.use(express.json());
 
+app.use("/css", express.static(`${__dirname}/css`));
+app.use("/js", express.static(`${__dirname}/js`));
+
 app.get("/", (req, res) => {
-  res.json({ message: "API Listening" });
+  res.sendFile(__dirname + "/index.html");
 });
-// return restaurant with required page and perPage params
 app.get("/api/restaurants", (req, res) => {
   db.getAllRestaurants(req.query.page, req.query.perPage, req.query.borough)
     .then((restaurants) => {
